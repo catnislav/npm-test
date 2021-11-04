@@ -3,21 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "Badge", {
+Object.defineProperty(exports, "PasswordField", {
   enumerable: true,
   get: function get() {
-    return _Badge.default;
-  }
-});
-Object.defineProperty(exports, "Button", {
-  enumerable: true,
-  get: function get() {
-    return _Button.default;
+    return _PasswordField.default;
   }
 });
 
-var _Badge = _interopRequireDefault(require("./components/Badge"));
-
-var _Button = _interopRequireDefault(require("./components/Button"));
+var _PasswordField = _interopRequireDefault(require("./components/PasswordField"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
