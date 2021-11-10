@@ -25,10 +25,17 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const PasswordField = () => {
+const PasswordField = _ref => {
+  let {
+    password = '',
+    showPassword = false
+  } = _ref;
+
   const [values, setValues] = _react.default.useState({
-    password: '',
-    showPassword: false
+    // password: '',
+    // showPassword: false,
+    password,
+    showPassword
   });
 
   const handleChange = prop => event => {
@@ -71,7 +78,15 @@ const PasswordField = () => {
     }, values.showPassword ? /*#__PURE__*/_react.default.createElement(_VisibilityOff.default, null) : /*#__PURE__*/_react.default.createElement(_Visibility.default, null))),
     label: "Password"
   }));
-};
+}; // PasswordField.propTypes = {
+//   password: PropTypes.string,
+//   showPassword: PropTypes.bool
+// };
+// PasswordField.defaultProps = {
+//   password: '',
+//   showPassword: false
+// };
+
 
 var _default = PasswordField;
 exports.default = _default;
