@@ -1,6 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { PasswordField } from '../npm'
+import { action } from '@storybook/addon-actions';
+
+const actionsData = {
+  onPinTask: action('onPinTask'),
+  onArchiveTask: action('onArchiveTask'),
+};
 
 export default {
   title: 'Katarina/Fields',
@@ -39,38 +45,48 @@ export default {
         }
       }
     },
+    // onClick: { action: 'clicked' },
+    // handleClickShowPassword: { action: 'clicked' },
+    onPinTask: { action: 'onPinTask' },
+    onArchiveTask: { action: 'onArchiveTask' },
   },
   // parameters: {
   //   actions: {
   //     handles: ['change .MuiInputBase-input', 'click .MuiButtonBase-root'],
   //   },
   // },
-  // parameters: {
-  //   actions: {
-  //     handleChange: { action: 'handleChange' },
-  //     handleClickShowPassword: { action: 'handleClickShowPassword' },
-  //   }
-  // }
+  parameters: {
+    actions: {
+      handleChange: { action: 'handleChange' },
+      handleClickShowPassword: { action: 'handleClickShowPassword' },
+    }
+  }
 }
 
-const Template = (args) => <PasswordField {...args} />;
+const Template = (args) => <PasswordField onArchiveTask onPinTask {...args} />;
 
 export const Default = Template.bind({});
+
 Default.storyName = 'Password Field'
 Default.args = {
   passwordLabel: 'Password',
   password: 'Password',
-  showPassword: false
+  showPassword: false,
+  onPasswordChange: val => console.log("lalallalal", val),
+  getPassword: val => console.log("got the password", val),
 };
 
 PasswordField.propTypes = {
   passwordLabel: PropTypes.string,
   password: PropTypes.string,
-  showPassword: PropTypes.bool
+  showPassword: PropTypes.bool,
+  onPasswordChange: PropTypes.func,
 }
 
 PasswordField.defaultProps = {
   passwordLabel: 'Password',
   password: 'Password',
-  showPassword: false
+  showPassword: false,
+  onPasswordChange: val => console.log("lalallalal", val),
+  getPassword: val => console.log("got the password", val),
 }

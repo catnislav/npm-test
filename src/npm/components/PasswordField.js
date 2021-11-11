@@ -10,8 +10,16 @@ import PasswordFieldStyle from './PasswordFieldStyle'
 // import EyeEnabledIcon from '../../images/logo-a-eye-enabled.svg'
 // import EyeDisabledIcon from '../../images/logo-a-eye-disabled.svg'
 
-const PasswordField = ({passwordLabel = '', password = '', showPassword = false}) => {
+const PasswordField = ({onArchiveTask, 
+  passwordLabel = '', 
+  password = '', 
+  showPassword = false, 
+  onPasswordChange = () => {},
+  getPassword = () => {},
+}) => {
   const s = PasswordFieldStyle;
+
+  // console.log(`onArchiveTask`, onArchiveTask)
 
   // const theme = createTheme();
 
@@ -24,12 +32,14 @@ const PasswordField = ({passwordLabel = '', password = '', showPassword = false}
   });
 
   const handleChange = (prop) => (event) => {
+    console.log('changed')
     setValues({ ...values, [prop]: event.target.value });
     // setValues(prev => ({ ...prev, password: event.target.value }));
+    onPasswordChange(event.target.value)
   };
   
   const handleClickShowPassword = () => {
-    console.log('changed')
+    console.log('clicked')
     setValues({
       ...values,
       showPassword: !values.showPassword,
@@ -81,6 +91,7 @@ const PasswordField = ({passwordLabel = '', password = '', showPassword = false}
           />
         </FormControl>
       {/* </ThemeProvider> */}
+      <button onClick={() => getPassword(values.password)}>Get password</button>
     </React.Fragment>
   )
 }
