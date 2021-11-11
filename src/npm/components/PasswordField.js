@@ -16,7 +16,7 @@ import PasswordFieldStyle from './PasswordFieldStyle'
 // import EyeDisabledIcon from '../../images/logo-a-eye-disabled.svg'
 
 const PasswordField = ({
-  passwordLabel = '', 
+  passwordLabel = 'Password', 
   password = '', 
   showPassword = false, 
   onPasswordChange = () => {}
