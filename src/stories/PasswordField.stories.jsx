@@ -1,21 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { PasswordField } from '../npm'
-import { action } from '@storybook/addon-actions';
-
-const actionsData = {
-  onPinTask: action('onPinTask'),
-  onArchiveTask: action('onArchiveTask'),
-};
 
 export default {
   title: 'Katarina/Fields',
   component: PasswordField,
-  // parameters: { 
-  //   docs: { 
-  //     page: null 
-  //   } 
-  // },
   argTypes: {
     passwordLabel: {
       name: 'Label',
@@ -45,36 +34,18 @@ export default {
         }
       }
     },
-    // onClick: { action: 'clicked' },
-    // handleClickShowPassword: { action: 'clicked' },
-    onPinTask: { action: 'onPinTask' },
-    onArchiveTask: { action: 'onArchiveTask' },
-  },
-  // parameters: {
-  //   actions: {
-  //     handles: ['change .MuiInputBase-input', 'click .MuiButtonBase-root'],
-  //   },
-  // },
-  parameters: {
-    actions: {
-      handleChange: { action: 'handleChange' },
-      handleClickShowPassword: { action: 'handleClickShowPassword' },
+    onPasswordChange: {
+      name: 'On password change',
+      description: 'Gets the value from the input like an argument',
+      table: {
+        type: {
+          summary: 'Function'
+        }
+      },
+      control: { disable: true },
     }
-  }
+  },
 }
-
-const Template = (args) => <PasswordField onArchiveTask onPinTask {...args} />;
-
-export const Default = Template.bind({});
-
-Default.storyName = 'Password Field'
-Default.args = {
-  passwordLabel: 'Password',
-  password: 'Password',
-  showPassword: false,
-  onPasswordChange: val => console.log("lalallalal", val),
-  getPassword: val => console.log("got the password", val),
-};
 
 PasswordField.propTypes = {
   passwordLabel: PropTypes.string,
@@ -87,6 +58,17 @@ PasswordField.defaultProps = {
   passwordLabel: 'Password',
   password: 'Password',
   showPassword: false,
-  onPasswordChange: val => console.log("lalallalal", val),
-  getPassword: val => console.log("got the password", val),
+  onPasswordChange: password => console.log(password),
 }
+
+const Template = (args) => <PasswordField {...args} />;
+
+export const Default = Template.bind({});
+
+Default.storyName = 'Password Field'
+Default.args = {
+  passwordLabel: 'Password',
+  password: 'Password',
+  showPassword: false,
+  // onPasswordChange: () => {},
+};

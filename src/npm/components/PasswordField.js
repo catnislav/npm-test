@@ -1,25 +1,27 @@
 import React from 'react'
+import FormControl from '@mui/material/FormControl'
 import IconButton from '@mui/material/IconButton'
+import InputAdornment from '@mui/material/InputAdornment'
+import InputLabel from '@mui/material/InputLabel'
+import OutlinedInput from '@mui/material/OutlinedInput'
+
+// import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import { FormControl, InputAdornment, InputLabel, OutlinedInput } from '@mui/material'
-// import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
 import PasswordFieldStyle from './PasswordFieldStyle'
 
 // import EyeEnabledIcon from '../../images/logo-a-eye-enabled.svg'
 // import EyeDisabledIcon from '../../images/logo-a-eye-disabled.svg'
 
-const PasswordField = ({onArchiveTask, 
+const PasswordField = ({
   passwordLabel = '', 
   password = '', 
   showPassword = false, 
-  onPasswordChange = () => {},
-  getPassword = () => {},
+  onPasswordChange = () => {}
 }) => {
   const s = PasswordFieldStyle;
-
-  // console.log(`onArchiveTask`, onArchiveTask)
 
   // const theme = createTheme();
 
@@ -28,18 +30,19 @@ const PasswordField = ({onArchiveTask,
   const [values, setValues] = React.useState({
     passwordLabel,
     password,
-    showPassword
+    showPassword,
+    onPasswordChange
   });
 
   const handleChange = (prop) => (event) => {
-    console.log('changed')
+    // console.log('changed')
     setValues({ ...values, [prop]: event.target.value });
     // setValues(prev => ({ ...prev, password: event.target.value }));
     onPasswordChange(event.target.value)
   };
   
   const handleClickShowPassword = () => {
-    console.log('clicked')
+    // console.log('clicked')
     setValues({
       ...values,
       showPassword: !values.showPassword,
@@ -50,7 +53,7 @@ const PasswordField = ({onArchiveTask,
   //   event.preventDefault();
   // };
   
-  React.useEffect(() => setValues({ ...values, passwordLabel, password, showPassword }), [passwordLabel, password, showPassword]);
+  React.useEffect(() => setValues({ passwordLabel, password, showPassword }), [passwordLabel, password, showPassword]);
   
   return (
     <React.Fragment>
@@ -87,11 +90,9 @@ const PasswordField = ({onArchiveTask,
               </InputAdornment>
             }
             // label="Password"
-            sx={s.outlinedInput}
           />
         </FormControl>
       {/* </ThemeProvider> */}
-      <button onClick={() => getPassword(values.password)}>Get password</button>
     </React.Fragment>
   )
 }

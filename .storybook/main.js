@@ -8,6 +8,9 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/preset-create-react-app"
   ],
+  "typescript": {
+    reactDocgen: 'react-docgen'
+  },
   "webpackFinal": (config) => {
     delete config.resolve.alias['emotion-theming'];
     delete config.resolve.alias['@emotion/styled'];

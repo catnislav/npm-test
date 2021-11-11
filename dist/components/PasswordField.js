@@ -9,13 +9,21 @@ require("core-js/modules/web.dom-collections.iterator.js");
 
 var _react = _interopRequireDefault(require("react"));
 
+var _FormControl = _interopRequireDefault(require("@mui/material/FormControl"));
+
 var _IconButton = _interopRequireDefault(require("@mui/material/IconButton"));
+
+var _InputAdornment = _interopRequireDefault(require("@mui/material/InputAdornment"));
+
+var _InputLabel = _interopRequireDefault(require("@mui/material/InputLabel"));
+
+var _OutlinedInput = _interopRequireDefault(require("@mui/material/OutlinedInput"));
 
 var _Visibility = _interopRequireDefault(require("@mui/icons-material/Visibility"));
 
 var _VisibilityOff = _interopRequireDefault(require("@mui/icons-material/VisibilityOff"));
 
-var _material = require("@mui/material");
+var _PasswordFieldStyle = _interopRequireDefault(require("./PasswordFieldStyle"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25,68 +33,79 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+// import EyeEnabledIcon from '../../images/logo-a-eye-enabled.svg'
+// import EyeDisabledIcon from '../../images/logo-a-eye-disabled.svg'
 const PasswordField = _ref => {
   let {
+    passwordLabel = '',
     password = '',
-    showPassword = false
+    showPassword = false,
+    onPasswordChange = () => {}
   } = _ref;
+  const s = _PasswordFieldStyle.default; // const theme = createTheme();
+  // console.log(`eyeEnabledIcon`, eyeEnabledIcon)
 
   const [values, setValues] = _react.default.useState({
-    // password: '',
-    // showPassword: false,
+    passwordLabel,
     password,
-    showPassword
+    showPassword,
+    onPasswordChange
   });
 
   const handleChange = prop => event => {
-    console.log("event.target", event.target);
+    // console.log('changed')
     setValues(_objectSpread(_objectSpread({}, values), {}, {
       [prop]: event.target.value
-    }));
+    })); // setValues(prev => ({ ...prev, password: event.target.value }));
+
+    onPasswordChange(event.target.value);
   };
 
-  const handleClickShowPassword = event => {
+  const handleClickShowPassword = () => {
+    // console.log('clicked')
     setValues(_objectSpread(_objectSpread({}, values), {}, {
       showPassword: !values.showPassword
     }));
-  };
+  }; // const handleMouseDownPassword = (event) => {
+  //   event.preventDefault();
+  // };
 
-  const handleMouseDownPassword = event => {
-    event.preventDefault();
-  };
 
-  return /*#__PURE__*/_react.default.createElement(_material.FormControl, {
-    sx: {
-      m: 1,
-      width: '25ch'
-    },
+  _react.default.useEffect(() => setValues({
+    passwordLabel,
+    password,
+    showPassword
+  }), [passwordLabel, password, showPassword]);
+
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_FormControl.default, {
+    sx: s.formControl,
     variant: "outlined"
-  }, /*#__PURE__*/_react.default.createElement(_material.InputLabel, {
+  }, /*#__PURE__*/_react.default.createElement(_InputLabel.default, {
+    sx: s.inputLabel,
     htmlFor: "outlined-adornment-password"
-  }, "Password"), /*#__PURE__*/_react.default.createElement(_material.OutlinedInput, {
+  }, values.passwordLabel), /*#__PURE__*/_react.default.createElement(_OutlinedInput.default, {
+    sx: s.outlinedInput,
     id: "outlined-adornment-password",
     type: values.showPassword ? 'text' : 'password',
     value: values.password,
     onChange: handleChange('password'),
-    endAdornment: /*#__PURE__*/_react.default.createElement(_material.InputAdornment, {
+    endAdornment: /*#__PURE__*/_react.default.createElement(_InputAdornment.default, {
+      sx: s.inputAdornment,
       position: "end"
     }, /*#__PURE__*/_react.default.createElement(_IconButton.default, {
+      sx: s.iconButton,
       "aria-label": "toggle password visibility",
-      onClick: handleClickShowPassword,
-      onMouseDown: handleMouseDownPassword,
+      onClick: handleClickShowPassword // onMouseDown={handleMouseDownPassword}
+      ,
       edge: "end"
-    }, values.showPassword ? /*#__PURE__*/_react.default.createElement(_VisibilityOff.default, null) : /*#__PURE__*/_react.default.createElement(_Visibility.default, null))),
-    label: "Password"
-  }));
-}; // PasswordField.propTypes = {
-//   password: PropTypes.string,
-//   showPassword: PropTypes.bool
-// };
-// PasswordField.defaultProps = {
-//   password: '',
-//   showPassword: false
-// };
+    }, values.showPassword ? /*#__PURE__*/_react.default.createElement(_VisibilityOff.default, {
+      sx: s.visibilityIcon
+    }) : /*#__PURE__*/_react.default.createElement(_Visibility.default, {
+      sx: s.visibilityIcon
+    }))) // label="Password"
 
+  })));
+};
 
 var _default = PasswordField;
 exports.default = _default;
