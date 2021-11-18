@@ -19,7 +19,7 @@ const PasswordField = ({
   passwordLabel = 'Password', 
   password = '', 
   showPassword = false, 
-  onPasswordChange = () => {}
+  onPasswordChange = () => {},
 }) => {
   const s = PasswordFieldStyle;
 
@@ -52,7 +52,7 @@ const PasswordField = ({
   // const handleMouseDownPassword = (event) => {
   //   event.preventDefault();
   // };
-  
+
   React.useEffect(() => setValues({ passwordLabel, password, showPassword }), [passwordLabel, password, showPassword]);
   
   return (

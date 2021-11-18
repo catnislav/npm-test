@@ -37,7 +37,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 // import EyeDisabledIcon from '../../images/logo-a-eye-disabled.svg'
 const PasswordField = _ref => {
   let {
-    passwordLabel = '',
+    passwordLabel = 'Password',
     password = '',
     showPassword = false,
     onPasswordChange = () => {}

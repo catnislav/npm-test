@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { PasswordField } from '../npm'
 
 export default {
-  title: 'Katarina/Fields',
+  title: 'Katarina/Fields/Password',
   component: PasswordField,
   argTypes: {
     passwordLabel: {
@@ -58,14 +58,14 @@ PasswordField.defaultProps = {
   passwordLabel: 'Password',
   password: 'Password',
   showPassword: false,
-  onPasswordChange: password => console.log(password),
+  onPasswordChange: password => password,
 }
 
 const Template = (args) => <PasswordField {...args} />;
 
 export const Default = Template.bind({});
 
-Default.storyName = 'Password Field'
+// Default.storyName = 'Password Field'
 Default.args = {
   passwordLabel: 'Password',
   password: 'Password',
